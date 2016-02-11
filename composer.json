@@ -1,0 +1,17 @@
+{
+    "name": "markei/bootstrap3bundle",
+    "license": "MIT",
+    "type": "library",
+    "description": "Symfony Bundle to integrate Bootstrap 3 without Assetic, Less, NPM",
+    "autoload": {
+        "psr-4": {
+            "Markei\\Bootstrap3Bundle\\": "src/Markei/Bootstrap3Bundle"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "symfony/symfony": "3.0.*",
+        "twbs/bootstrap": "3.0.*",
+        "components/jquery":  "1.12.*"
+    }
+}
