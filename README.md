@@ -25,7 +25,7 @@ Installation
     );
 ```
 
-**3** Run the following command to copy the files
+**3** Run the following command to copy the files (for Symfony 2.8 users use app/console instead of bin/console)
 
 ``` shell
     $php bin/console markei:bootstrap3:copy

@@ -10,7 +10,7 @@
     },
     "require": {
         "php": ">=5.5.0",
-        "symfony/symfony": "3.0.*",
+        "symfony/symfony": "2.8.*",
         "twbs/bootstrap": "3.0.*",
         "components/jquery":  "1.12.*"
     }
