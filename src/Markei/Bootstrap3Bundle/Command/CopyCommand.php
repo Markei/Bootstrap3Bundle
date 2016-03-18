@@ -193,7 +193,7 @@ class CopyCommand extends ContainerAwareCommand
             $params['dst_bootstrap_js'] => $params['src_bootstrap_js'],
             $params['dst_jquery_js'] => $params['src_jquery_js'],
         ];
-        $fontFileFinder = Finder::create()->files()->name('*.eot')->name('*.ttf')->name('*.woff')->name('*.svg')->in($params['src_bootstrap_fonts']);
+        $fontFileFinder = Finder::create()->files()->name('*.eot')->name('*.ttf')->name('*.woff')->name('*.woff2')->name('*.svg')->in($params['src_bootstrap_fonts']);
         foreach ($fontFileFinder as $fontFile) {
             $listOfFilesToCopy[$params['dst_bootstrap_fonts'] . DIRECTORY_SEPARATOR . $fontFile->getFileName()] = $fontFile->getPathName();
         }
