@@ -25,6 +25,8 @@ namespace Markei\Bootstrap3Bundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\Config\FileLocator;
 
 /**
  * This is the class that loads and manages your bundle configuration.
@@ -49,5 +51,8 @@ class MarkeiBootstrap3Extension extends Extension
         $container->setParameter('markei_bootstrap3.dst_bootstrap_js', $config['dst_bootstrap_js']);
         $container->setParameter('markei_bootstrap3.dst_bootstrap_fonts', $config['dst_bootstrap_fonts']);
         $container->setParameter('markei_bootstrap3.dst_jquery_js', $config['dst_jquery_js']);
+
+        $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('services.yaml');
     }
 }

@@ -29,6 +29,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * This command copy the Bootstrap 3 files to the web directory
@@ -36,41 +37,37 @@ use Symfony\Component\Filesystem\Exception\IOException;
  * @author maartendekeizer
  * @copyright Markei.nl
  */
-class CopyCommand extends ContainerAwareCommand
+class CopyCommand extends Command
 {
+    private $params = [];
+
+    public function __construct(array $params)
+    {
+        parent::__construct('markei:bootstrap3:copy');
+        $this->params = $params;
+    }
+
     /**
      * {@inheritDoc}
-     * @see \Symfony\Component\Console\Command\Command::run()
+     * @see \Symfony\Component\Console\Command\Command::execute()
      */
-    public function run(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output)
     {
         $fs = new Filesystem();
 
-        // write to local config area
-        $params = [
-            'src_bootstrap_css' => $this->getContainer()->getParameter('markei_bootstrap3.src_bootstrap_css'),
-            'src_bootstrap_js' => $this->getContainer()->getParameter('markei_bootstrap3.src_bootstrap_js'),
-            'src_bootstrap_fonts' => $this->getContainer()->getParameter('markei_bootstrap3.src_bootstrap_fonts'),
-            'src_jquery_js' => $this->getContainer()->getParameter('markei_bootstrap3.src_jquery_js'),
-            'dst_bootstrap_css' => $this->getContainer()->getParameter('markei_bootstrap3.dst_bootstrap_css'),
-            'dst_bootstrap_js' => $this->getContainer()->getParameter('markei_bootstrap3.dst_bootstrap_js'),
-            'dst_bootstrap_fonts' => $this->getContainer()->getParameter('markei_bootstrap3.dst_bootstrap_fonts'),
-            'dst_jquery_js' => $this->getContainer()->getParameter('markei_bootstrap3.dst_jquery_js'),
-        ];
-
         $output->writeln('// Copy Bootstrap 3 files');
 
-        $continue = $this->checkSourceFiles($params, $output);
+        $continue = $this->checkSourceFiles($this->params, $output);
         if ($continue === false) {
             return;
         }
 
-        $continue = $this->createDestinationDirectories($params, $output);
+        $continue = $this->createDestinationDirectories($this->params, $output);
         if ($continue === false) {
             return;
         }
 
-        $continue = $this->copyFiles($params, $output);
+        $continue = $this->copyFiles($this->params, $output);
         if ($continue === false) {
             return;
         }
@@ -82,7 +79,6 @@ class CopyCommand extends ContainerAwareCommand
      */
     protected function configure()
     {
-        $this->setName('markei:bootstrap3:copy');
         $this->setDescription('Copy the Bootstrap 3 files to the web directory');
     }
 

@@ -1,0 +1,16 @@
+services:
+    Markei\Bootstrap3Bundle\Command\CopyCommand:
+        class: Markei\Bootstrap3Bundle\Command\CopyCommand
+        arguments:
+            -
+                src_bootstrap_css: '%markei_bootstrap3.src_bootstrap_css%'
+                src_bootstrap_js: '%markei_bootstrap3.src_bootstrap_js%'
+                src_bootstrap_fonts: '%markei_bootstrap3.src_bootstrap_fonts%'
+                src_jquery_js: '%markei_bootstrap3.src_jquery_js%'
+                dst_bootstrap_css: '%markei_bootstrap3.dst_bootstrap_css%'
+                dst_bootstrap_js: '%markei_bootstrap3.dst_bootstrap_js%'
+                dst_bootstrap_fonts: '%markei_bootstrap3.dst_bootstrap_fonts%'
+                dst_jquery_js: '%markei_bootstrap3.dst_jquery_js%'
+                
+        tags:
+            - { name: 'console.command' }
