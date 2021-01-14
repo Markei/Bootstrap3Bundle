@@ -38,8 +38,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('markei_bootstrap3');
+        $treeBuilder = new TreeBuilder('markei_bootstrap3');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode->children()
             ->scalarNode('src_bootstrap_css')
